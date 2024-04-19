@@ -29,5 +29,8 @@ PARAMETER stop "<|start_header_id|>"
 PARAMETER stop "<|end_header_id|>"
 PARAMETER stop "<|eot_id|>"
 PARAMETER stop "<|reserved_special_token"
+# PARAMETER stop "!assistant"
+# PARAMETER stop ".assistant"
+# PARAMETER stop "?assistant"
 
 
