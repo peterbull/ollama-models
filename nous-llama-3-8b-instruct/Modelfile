@@ -1,0 +1,33 @@
+## Meta-Llama-3-8B-Instruct-Q5_K_M.gguf
+
+FROM ../downloads/Meta-Llama-3-8B-Instruct-Q5_K_M.gguf
+
+PARAMETER temperature 0.5
+PARAMETER num_ctx 8192
+PARAMETER num_predict -1
+PARAMETER repeat_last_n -1
+PARAMETER repeat_penalty 1.1
+
+# Tail free sampling is used to reduce the impact of less probable tokens from the output.
+PARAMETER tfs_z 1
+
+# Reduce the probability of generating nonsense while allowing for some diversity.
+PARAMETER top_k 40
+PARAMETER top_p 0.95
+
+# Setting a custom system message to specify the behavior of the chat assistant.
+SYSTEM """You are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability."""
+
+TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
+
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
+{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+
+{{ .Response }}<|eot_id|>"""
+PARAMETER stop "<|start_header_id|>"
+PARAMETER stop "<|end_header_id|>"
+PARAMETER stop "<|eot_id|>"
+PARAMETER stop "<|reserved_special_token"
+
+
